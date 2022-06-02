@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 
 public class Request implements Symbols, CoordinateTurns, CoordinatesIssue {
@@ -8,9 +7,6 @@ public class Request implements Symbols, CoordinateTurns, CoordinatesIssue {
     private final int frigates;
     private final int battleships;
     private final int aircraftCarriers;
-    private int submarines;
-    private int nuclearSubmarine;
-    private int oceanBase;
 
 
     private final ArrayList<ArrayList<int[]>> list = new ArrayList<>(); //Collection of collections with arrays (coordinates of each created Warship)
@@ -18,32 +14,6 @@ public class Request implements Symbols, CoordinateTurns, CoordinatesIssue {
     private final ArrayList <int[]> coordinatesLibrary = new ArrayList<>(); //Collection of temporary arrays (coordinates) used for local methods
     private ArrayList <int[]> turnsStack = new ArrayList<>(); //Collection of arrays (means coordinates) that was saved from previous Turn if it was successful.
 
-    public Request(int oceanBase, int nuclearSubmarine, int submarines, int aircraftCarriers, int battleships, int frigates, int boats) {
-        this.boats = boats;
-        this.frigates = frigates;
-        this.battleships = battleships;
-        this.aircraftCarriers = aircraftCarriers;
-        this.submarines = submarines;
-        this.nuclearSubmarine = nuclearSubmarine;
-        this.oceanBase = oceanBase;
-    }
-
-    public Request(int nuclearSubmarine, int submarines, int aircraftCarriers, int battleships, int frigates, int boats) {
-        this.boats = boats;
-        this.frigates = frigates;
-        this.battleships = battleships;
-        this.aircraftCarriers = aircraftCarriers;
-        this.submarines = submarines;
-        this.nuclearSubmarine = nuclearSubmarine;
-    }
-
-    public Request(int submarines, int aircraftCarriers, int battleships, int frigates, int boats) {
-        this.boats = boats;
-        this.frigates = frigates;
-        this.battleships = battleships;
-        this.aircraftCarriers = aircraftCarriers;
-        this.submarines = submarines;
-    }
 
     public Request(int aircraftCarriers, int battleships, int frigates, int boats) {
         this.boats = boats;

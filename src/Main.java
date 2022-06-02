@@ -21,11 +21,9 @@ public class Main  implements Symbols{
 
         WarField allieField = new WarField(hr, vr);
         Request allieRequest = new Request(1,2,3,4);
-        //Request allieRequest = new Request(4,3,2,1);
         allieField.createField();
 
         WarField botField = new WarField(hr, vr);
-        //Request botRequest = new Request(4, 3, 2, 1);
         Request botRequest = new Request(1, 2, 3, 4);
         botField.createField();
 
@@ -49,7 +47,7 @@ public class Main  implements Symbols{
 
 ////////////////////////////////////////////////Battleship
         System.out.println("Please create 2 BATTLESHIPS.");
-        //addBattleships(allieRequest);
+        addBattleships(allieRequest);
 
         allieRequest.requestImplementation(allieField);
         allieField.fillCoordinates();
@@ -57,7 +55,7 @@ public class Main  implements Symbols{
 
 //////////////////////////////////////////////////Frigates
         System.out.println("Please create 3 FRIGATES.");
-        //addFrigates(allieRequest);
+        addFrigates(allieRequest);
 
         allieRequest.requestImplementation(allieField);
         allieField.fillCoordinates();
@@ -65,7 +63,7 @@ public class Main  implements Symbols{
 
 //////////////////////////////////////////////////////////Boats
         System.out.println("Please create 4 BOATS.");
-        //addBoats(allieRequest);
+        addBoats(allieRequest);
 
         allieRequest.requestImplementation(allieField);
         allieField.fillCoordinates();
