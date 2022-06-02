@@ -14,23 +14,19 @@ public class Main  implements Symbols{
 
         System.out.println("Enter the vertical size of the battle field: (from 10 to 20)");
         int vr = isFieldSize(Tech.GetInputFunction());
-        System.out.println("Enter the vertical size of the battle field: (from 10 to 20)");
 
 
         //New WarField, new Request creation for both computer and user.
         //Method createField() is called for both created WarFields
-        int mmf = (vr*hr/100) + 4 - 1;
-
-        System.out.println(mmf);
 
         WarField allieField = new WarField(hr, vr);
-        Request allieRequest = new Request(mmf-6,mmf-5,mmf-4,mmf-3, mmf-2, mmf-1, mmf);
+        Request allieRequest = new Request(1,2,3,4);
         //Request allieRequest = new Request(4,3,2,1);
         allieField.createField();
 
         WarField botField = new WarField(hr, vr);
         //Request botRequest = new Request(4, 3, 2, 1);
-        Request botRequest = new Request(mmf-6,mmf-5,mmf-4,mmf-3, mmf-2, mmf-1, mmf);
+        Request botRequest = new Request(1, 2, 3, 4);
         botField.createField();
 
         //Method getAllCoordinates
