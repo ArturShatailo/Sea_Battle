@@ -25,14 +25,6 @@ public class WarField implements Symbols{
         return warField;
     }
 
-    public int getHorizontalSize() {
-        return horizontalSize;
-    }
-
-    public int getVerticalSize() {
-        return verticalSize;
-    }
-
 ///////////////////////////////////////////////////
 
     //New Warship creation with 'status' field "placed" and coordinates taken from list collection. Collection of Warship objects
