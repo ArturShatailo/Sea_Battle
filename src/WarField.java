@@ -88,9 +88,8 @@ public class WarField implements Symbols{
                 System.out.print(warFieldUI[i][k]+" | ");
 
             }
-            //System.out.println("\n---+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+");
             System.out.print("\n");
-            for(int l = 0; l<=horizontalSize; l++){
+            for(int l = 0; l<=verticalSize; l++){
                 System.out.print("-----+");
             }
             System.out.print("\n");
