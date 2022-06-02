@@ -9,19 +9,32 @@ public class Main  implements Symbols{
     public static void main(String[] args){
 
 
+        System.out.println("Enter the horizontal size of the battle field: (from 10 to 20)");
+        int hr = isFieldSize(Tech.GetInputFunction());
+
+        System.out.println("Enter the vertical size of the battle field: (from 10 to 20)");
+        int vr = isFieldSize(Tech.GetInputFunction());
+        System.out.println("Enter the vertical size of the battle field: (from 10 to 20)");
+
+
         //New WarField, new Request creation for both computer and user.
         //Method createField() is called for both created WarFields
+        int mmf = (vr*hr/100) + 4 - 1;
 
-        WarField allieField = new WarField();
-        Request allieRequest = new Request(4,3,2,1);
+        System.out.println(mmf);
+
+        WarField allieField = new WarField(hr, vr);
+        Request allieRequest = new Request(mmf-6,mmf-5,mmf-4,mmf-3, mmf-2, mmf-1, mmf);
+        //Request allieRequest = new Request(4,3,2,1);
         allieField.createField();
 
-        WarField botField = new WarField();
-        Request botRequest = new Request(4, 3, 2, 1);
+        WarField botField = new WarField(hr, vr);
+        //Request botRequest = new Request(4, 3, 2, 1);
+        Request botRequest = new Request(mmf-6,mmf-5,mmf-4,mmf-3, mmf-2, mmf-1, mmf);
         botField.createField();
 
         //Method getAllCoordinates
-        Tech.getAllCoordinates(10, 10);
+        Tech.getAllCoordinates(hr, vr);
 
         //Method printUI call of user's WarField.
         allieField.printUI();
@@ -40,7 +53,7 @@ public class Main  implements Symbols{
 
 ////////////////////////////////////////////////Battleship
         System.out.println("Please create 2 BATTLESHIPS.");
-        addBattleships(allieRequest);
+        //addBattleships(allieRequest);
 
         allieRequest.requestImplementation(allieField);
         allieField.fillCoordinates();
@@ -48,7 +61,7 @@ public class Main  implements Symbols{
 
 //////////////////////////////////////////////////Frigates
         System.out.println("Please create 3 FRIGATES.");
-        addFrigates(allieRequest);
+        //addFrigates(allieRequest);
 
         allieRequest.requestImplementation(allieField);
         allieField.fillCoordinates();
@@ -56,7 +69,7 @@ public class Main  implements Symbols{
 
 //////////////////////////////////////////////////////////Boats
         System.out.println("Please create 4 BOATS.");
-        addBoats(allieRequest);
+        //addBoats(allieRequest);
 
         allieRequest.requestImplementation(allieField);
         allieField.fillCoordinates();
@@ -70,6 +83,12 @@ public class Main  implements Symbols{
         winner = startFight(botRequest, botField, allieRequest, allieField, Tech.getRandom(0, 1) == 0);
         System.out.println("The winner is: " + winner);
 
+    }
+
+
+    //Method checks if the field size entered is allowed.
+    private static int isFieldSize(int i) {
+        return Math.max(i, 10);
     }
 
     /*
@@ -225,27 +244,24 @@ public class Main  implements Symbols{
 
         botRequest.requestImplementation(botField);
 
-        //botField.fillCoordinates();
+        botField.fillCoordinates();
 
         botField.printUI();
     }
 
-    //The method that converts entered coordinates from @param char[] to [digit][digit] and returns int[] array.
+    //The 2 bound method that converts entered coordinates from @param char[] to [digit][digit] and returns int[] array.
     public static int[] coordinatesToFigures(char[] c){
-
-        if(Character.isDigit(c[0])){
-            return coordinatesArray(c, 0, 1);
-        }else{
-            return coordinatesArray(c, 1, 0);
-        }
-
+        return Character.isDigit(c[0]) ?  coordinatesArray(c, 0, 1) : coordinatesArray(c, 1, 0);
     }
-
     private static int[] coordinatesArray(char[] c, int i, int k) {
 
         int[] array = new int[2];
-        array[1] = Integer.parseInt(String.valueOf(c[i]));
-        array[0] = Arrays.binarySearch(abc, String.valueOf(c[k]).toLowerCase());
+
+        array[1] = c.length < 3
+                ? Integer.parseInt(String.valueOf(c[i]))
+                : Integer.parseInt(c[i]+""+c[i+1]);
+
+        array[0] = Arrays.binarySearch(abc, String.valueOf(c[k*(c.length-1)]).toLowerCase());
 
         return array;
 
@@ -345,15 +361,13 @@ public class Main  implements Symbols{
             active = turn.check(request, warField);
             System.out.println("Computer's turn: " + abc[turn.getCoordinates()[0]] +""+ turn.getCoordinates()[1]);
 
-            System.out.println("\n\nYour war field");
-            warField.printUI();
-
             if(warField.getFleet().getWarships().stream().allMatch(a -> a.getStatus().equals("Destroyed"))){
                 winner = "computer";
                 break;
             }
-
         }
+        System.out.println("\n\nYour war field");
+        warField.printUI();
         startFight(botRequest, botField, request, warField, true);
     }
 }

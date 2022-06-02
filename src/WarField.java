@@ -4,12 +4,17 @@ import java.util.stream.Collectors;
 
 public class WarField implements Symbols{
 
-    private final String [][] warFieldUI = new String[11][11];
-    private final String [][] warField = new String[10][10];
+    private final String [][] warFieldUI;
+    private final String [][] warField;
     private final Fleet fleet = new Fleet();
+    private final int horizontalSize;
+    private final int verticalSize;
 
-    public WarField() {
-
+    public WarField(int horizontalSize, int verticalSize) {
+        this.warFieldUI = new String[horizontalSize+1][verticalSize+1];
+        this.warField = new String[horizontalSize][verticalSize];
+        this.horizontalSize = horizontalSize;
+        this.verticalSize = verticalSize;
     }
 
     public Fleet getFleet() {
@@ -20,7 +25,13 @@ public class WarField implements Symbols{
         return warField;
     }
 
+    public int getHorizontalSize() {
+        return horizontalSize;
+    }
 
+    public int getVerticalSize() {
+        return verticalSize;
+    }
 
 ///////////////////////////////////////////////////
 
@@ -70,18 +81,27 @@ public class WarField implements Symbols{
             for(int k=0; k<warFieldUI[i].length; k++){
 
                 if(i==0 && k==0){
-                    warFieldUI[i][k] = "-";
+                    warFieldUI[i][k] = "  - ";
                 }else if(i==0){
-                    warFieldUI[i][k] = String.valueOf(k-1);
+                    if(k>10){
+                        warFieldUI[i][k] = " "+(k-1);
+                    }else {
+                        warFieldUI[i][k] = " " + (k - 1) + " ";
+                    }
                 }else if(k==0){
-                    warFieldUI[i][k] = abc[i-1];
+                    warFieldUI[i][k] = "  "+abc[i-1]+" ";
                 }else{
-                    warFieldUI[i][k] = warField[i-1][k-1];
+                    warFieldUI[i][k] = " "+warField[i-1][k-1]+" ";
                 }
-                System.out.print(warFieldUI[i][k]+"  |  ");
+                System.out.print(warFieldUI[i][k]+" | ");
 
             }
-            System.out.println("\n---+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+");
+            //System.out.println("\n---+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+");
+            System.out.print("\n");
+            for(int l = 0; l<=horizontalSize; l++){
+                System.out.print("-----+");
+            }
+            System.out.print("\n");
         }
     }
 
